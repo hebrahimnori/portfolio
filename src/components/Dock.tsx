@@ -5,7 +5,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "./input.css";
 import "./output.css";
 import React from "react";
@@ -291,6 +291,12 @@ function Dock() {
 
 function AppIcon({ mouseX, children }) {
   const ref = useRef(null);
+  const [isBouncing, setIsBouncing] = useState(false);
+
+  const handleClick = () => {
+    setIsBouncing(true);
+    setTimeout(() => setIsBouncing(false), 1000);
+  };
 
   const distance = useTransform(mouseX, (val) => {
     const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
@@ -308,7 +314,10 @@ function AppIcon({ mouseX, children }) {
     <motion.div
       ref={ref}
       style={{ width }}
-      className="aspect-square w-10 rounded-full linksBtn "
+      className={`aspect-square w-10 rounded-full linksBtn ${
+        isBouncing ? "bounce" : ""
+      }`}
+      onClick={handleClick}
     >
       {children}
     </motion.div>

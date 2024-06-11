@@ -14,7 +14,7 @@ function App() {
         <Route index path="/" element={<MainPage />} replace />
         <Route path="/projects" element={<ProjectPage />} />
         <Route path="/projects/:id" element={<ProjectsDetail />} />
-        <Route path="/skills" element={<SkillPage />} />
+        <Route path="/designs" element={<SkillPage />} />
         <Route path="/photography" element={<PhotoPage />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>

@@ -9,7 +9,9 @@ import { useRef } from "react";
 import "./input.css";
 import "./output.css";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip } from "react-tooltip";
 
 function Dock() {
   const mouseX = useMotionValue(Infinity);
@@ -21,7 +23,12 @@ function Dock() {
       className="mx-auto flex h-16 items-end gap-2 rounded-full bg-gray-700 px-4 pb-3 dock-cont"
     >
       <AppIcon mouseX={mouseX}>
-        <Link>
+        <NavLink
+          to={"/"}
+          data-tooltip-id="footer-tooltip"
+          data-tooltip-content="Home"
+          data-tooltip-place="top"
+        >
           <svg
             width="inherit"
             height="inherit"
@@ -42,10 +49,16 @@ function Dock() {
               fill="#7A7A7A"
             />
           </svg>
-        </Link>
+        </NavLink>
+        <span className="pagetrack active"></span>
       </AppIcon>
       <AppIcon mouseX={mouseX}>
-        <Link to={"#"}>
+        <NavLink
+          to={"/projects"}
+          data-tooltip-id="footer-tooltip"
+          data-tooltip-content="Projects"
+          data-tooltip-place="top"
+        >
           <svg
             width="inherit"
             height="inherit"
@@ -64,10 +77,16 @@ function Dock() {
               fill="#7A7A7A"
             />
           </svg>
-        </Link>
+        </NavLink>
+        <span className="pagetrack active"></span>
       </AppIcon>
       <AppIcon mouseX={mouseX}>
-        <Link>
+        <NavLink
+          to={"/designs"}
+          data-tooltip-id="footer-tooltip"
+          data-tooltip-content="Designs"
+          data-tooltip-place="top"
+        >
           <svg
             width="inherit"
             height="inherit"
@@ -95,10 +114,16 @@ function Dock() {
               fill="#7A7A7A"
             />
           </svg>
-        </Link>
+        </NavLink>
+        <span className="pagetrack active"></span>
       </AppIcon>
       <AppIcon mouseX={mouseX}>
-        <Link>
+        <NavLink
+          to={"/photography"}
+          data-tooltip-id="footer-tooltip"
+          data-tooltip-content="Photography"
+          data-tooltip-place="top"
+        >
           <svg
             width="inherit"
             height="inherit"
@@ -122,11 +147,18 @@ function Dock() {
               stroke-linecap="round"
             />
           </svg>
-        </Link>
+        </NavLink>
+        <span className="pagetrack active"></span>
       </AppIcon>
       <hr />
       <AppIcon mouseX={mouseX}>
-        <Link>
+        <Link
+          target="blank"
+          to={"https://www.linkedin.com/in/hebinouri/"}
+          data-tooltip-id="footer-tooltip"
+          data-tooltip-content="Linkedin"
+          data-tooltip-place="top"
+        >
           <svg
             width="inherit"
             height="inherit"
@@ -142,7 +174,13 @@ function Dock() {
         </Link>
       </AppIcon>
       <AppIcon mouseX={mouseX}>
-        <Link>
+        <Link
+          target="blank"
+          to={"https://github.com/hebrahimnori"}
+          data-tooltip-id="footer-tooltip"
+          data-tooltip-content="Github"
+          data-tooltip-place="top"
+        >
           <svg
             width="inherit"
             height="inherit"
@@ -158,7 +196,12 @@ function Dock() {
         </Link>
       </AppIcon>
       <AppIcon mouseX={mouseX}>
-        <Link>
+        <Link
+          to={"mailto:hebrahimnori@gmail.com"}
+          data-tooltip-id="footer-tooltip"
+          data-tooltip-content="Mail"
+          data-tooltip-place="top"
+        >
           <svg
             width="inherit"
             height="inherit"
@@ -182,7 +225,12 @@ function Dock() {
       </AppIcon>
       <hr />
       <AppIcon mouseX={mouseX}>
-        <Link>
+        <Link
+          to={""}
+          data-tooltip-id="footer-tooltip"
+          data-tooltip-content="Toggle theme"
+          data-tooltip-place="top"
+        >
           <svg
             width="inherit"
             height="inherit"
@@ -198,7 +246,12 @@ function Dock() {
         </Link>
       </AppIcon>
       <AppIcon mouseX={mouseX}>
-        <Link>
+        <Link
+          to={""}
+          data-tooltip-id="footer-tooltip"
+          data-tooltip-content="Toggle sound"
+          data-tooltip-place="top"
+        >
           <svg
             width="inherit"
             height="inherit"
@@ -221,6 +274,17 @@ function Dock() {
           </svg>
         </Link>
       </AppIcon>
+      <Tooltip
+        id="footer-tooltip"
+        style={{
+          borderRadius: "10px",
+          fontSize: "12px",
+          padding: "6px 12px",
+          backgroundColor: "white",
+          color: "#7A7A7A",
+        }}
+        border="1px solid #7A7A7A"
+      />
     </motion.div>
   );
 }

@@ -579,25 +579,16 @@ video {
   align-items: flex-end;
 }
 
-.gap-4 {
-  gap: 1rem;
-}
-
 .gap-2 {
   gap: 0.5rem;
-}
-
-.gap-1 {
-  gap: 0.25rem;
 }
 
 .rounded-full {
   border-radius: 9999px;
 }
 
-.bg-gray-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+.border {
+  border-width: 1px;
 }
 
 .bg-gray-700 {
@@ -669,10 +660,11 @@ hr {
 .linksBtn {
   background-image: linear-gradient(45deg, #f8f8f8, #e8e8e8, #f8f8f8, #e8e8e8);
   background-size: 200% 140%;
+  position: relative;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
 }
 
 .linksBtn a {
@@ -701,4 +693,21 @@ hr {
     rgb(255, 255, 255) calc(100% - 16px),
     transparent
   );
+}
+
+.pagetrack {
+  display: block;
+  width: 4px;
+  height: 4px;
+  background-color: #dbdbdb;
+  border-radius: 100%;
+  position: absolute;
+  bottom: -8px;
+  opacity: 0;
+  transition: 0.5;
+}
+
+.linksBtn a.active ~ .pagetrack.active {
+  transition: 0.5s;
+  opacity: 1;
 }

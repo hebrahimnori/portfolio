@@ -7,7 +7,7 @@ import {
 } from "framer-motion";
 import { useRef, useState } from "react";
 import "./input.css";
-import "./output.css";
+// import "./output.css";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import "react-tooltip/dist/react-tooltip.css";
@@ -20,7 +20,7 @@ function Dock() {
     <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
-      className="mx-auto flex h-16 items-end gap-2 rounded-full bg-gray-700 px-4 pb-3 dock-cont"
+      className="mx-auto flex h-16 items-end gap-2 rounded-full px-4 pb-3 dock-cont"
     >
       <AppIcon mouseX={mouseX}>
         <NavLink

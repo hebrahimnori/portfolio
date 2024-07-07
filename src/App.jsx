@@ -9,16 +9,18 @@ import Layout from "./layout/Layout";
 
 function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route index path="/" element={<MainPage />} replace />
-        <Route path="/projects" element={<ProjectPage />} />
-        <Route path="/projects/:id" element={<ProjectsDetail />} />
-        <Route path="/aboutme" element={<AboutMe />} />
-        <Route path="/photography" element={<PhotoPage />} />
-        <Route path="/*" element={<PageNotFound />} />
-      </Routes>
-    </Layout>
+    <div className="font-poppins">
+      <Layout>
+        <Routes>
+          <Route index path="/" element={<MainPage />} replace />
+          <Route path="/projects" element={<ProjectPage />} />
+          <Route path="/projects/:id" element={<ProjectsDetail />} />
+          <Route path="/aboutme" element={<AboutMe />} />
+          <Route path="/photography" element={<PhotoPage />} />
+          <Route path="/*" element={<PageNotFound />} />
+        </Routes>
+      </Layout>
+    </div>
   );
 }
 

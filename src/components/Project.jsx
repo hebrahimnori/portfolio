@@ -1,12 +1,30 @@
 import React from "react";
 import styles from "./Project.module.scss";
 
-function Project({ title, type, description, imageURL, skills, button }) {
+function Project({
+  title,
+  type,
+  imageType,
+  description,
+  imageURL,
+  skills,
+  button,
+}) {
   return (
     <>
       <div className={`${styles.project_card} break-inside-avoid mb-1`}>
         <div className={styles.project_image_cont}>
-          <img src={`src/assets/projectimage/${imageURL}`} alt={title} />
+          {imageType === "photo" && (
+            <img src={`src/assets/projectimage/${imageURL}`} alt={title} />
+          )}
+          {imageType === "video" && (
+            <video autoPlay loop muted>
+              <source
+                src={`src/assets/projectimage/${imageURL}`}
+                type="video/mp4"
+              />
+            </video>
+          )}
         </div>
         <div className={styles.project_text_cont}>
           {type === "design" && (

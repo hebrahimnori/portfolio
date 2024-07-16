@@ -10,7 +10,11 @@ function PhotoPage() {
         <ul className={styles.gallery}>
           {images.map((num) => (
             <li key={num}>
-              <img src={`./src/assets/pic${num}.jpg`} alt={`pic${num}`} />
+              <img
+                loading="lazy"
+                src={`./src/assets/pic${num}.jpg`}
+                alt={`pic${num}`}
+              />
             </li>
           ))}
         </ul>

@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         poppins: ["Poppins"],
+        tiny: ["Tiny5"],
       },
     },
   },

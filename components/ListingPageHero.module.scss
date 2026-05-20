@@ -1,0 +1,78 @@
+.hero {
+  margin-bottom: clamp(2rem, 5vw, 4.25rem);
+  max-width: min(46rem, 100%);
+  padding-left: clamp(0.5rem, 2vw, 0.75rem);
+  border-left: 1px solid color-mix(in srgb, var(--hebi-teal, #00b992) 42%, transparent);
+}
+
+.eyebrow {
+  margin: 0 0 0.45rem clamp(0.5rem, 2vw, 0.75rem);
+  font-size: clamp(0.625rem, 1.8vw, 0.6875rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--list-ink-muted, #596f8a) 72%, var(--hebi-teal, #00b992));
+}
+
+.title {
+  margin: 0 0 0 clamp(0.5rem, 2vw, 0.75rem);
+  font-family:
+    "Unbounded",
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.85rem, 7.5vw, 3.75rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: var(--list-ink-strong, #15202b);
+  word-break: break-word;
+}
+
+.titleAccent {
+  display: block;
+  margin-top: 0.14em;
+  font-weight: 500;
+  font-size: clamp(0.78rem, 3.2vw, 1.35rem);
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--list-ink-muted, #596f8a) 88%, var(--hebi-teal, #00b992));
+}
+
+@media (min-width: 640px) {
+  .titleAccent {
+    font-size: 0.44em;
+  }
+}
+
+.kicker {
+  margin: clamp(0.65rem, 2vw, 0.85rem) 0 0 clamp(0.5rem, 2vw, 0.75rem);
+  max-width: 34rem;
+  font-size: clamp(0.875rem, 2.2vw, 1.0625rem);
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: -0.015em;
+  color: color-mix(in srgb, var(--list-ink, #3d4f5f) 90%, var(--hebi-teal, #00b992));
+}
+
+.rule {
+  margin: clamp(0.9rem, 2.2vw, 1.35rem) 0 0 clamp(0.5rem, 2vw, 0.75rem);
+  height: 2px;
+  max-width: clamp(3.5rem, 18vw, 5.5rem);
+  border-radius: 999px;
+  transform-origin: 0 50%;
+  background: linear-gradient(
+    90deg,
+    var(--hebi-teal, #00b992),
+    color-mix(in srgb, var(--hebi-slate, #596f8a) 55%, var(--hebi-teal, #00b992))
+  );
+}
+
+.meta {
+  margin: clamp(0.85rem, 2vw, 1.25rem) 0 0 clamp(0.5rem, 2vw, 0.75rem);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: clamp(0.625rem, 1.8vw, 0.6875rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: color-mix(in srgb, var(--list-ink-muted, #596f8a) 82%, transparent);
+}

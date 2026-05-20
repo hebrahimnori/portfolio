@@ -1,0 +1,216 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+/* Display headlines (listing pages + project cards) — pairs with IBM Plex Sans for UI/body */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,600;0,700;0,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tiny5&display=swap");
+/* Light home typography: Instrument Serif + Unbounded + IBM Plex Mono */
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Shared page shell (projects / photography / academic) + project cards */
+html {
+  --shell-bg: #121212;
+  --shell-fg: rgba(255, 255, 255, 0.92);
+  --shell-eyebrow: rgba(255, 255, 255, 0.45);
+  --shell-subtitle: rgba(255, 255, 255, 0.5);
+  --shell-rule: rgba(255, 255, 255, 0.35);
+  --shell-glow-1: rgba(63, 94, 251, 0.18);
+  --shell-glow-2: rgba(252, 70, 107, 0.12);
+  --shell-glow-3: rgba(21, 153, 87, 0.08);
+  --title-grad-1: #ffffff;
+  --title-grad-2: rgba(255, 255, 255, 0.72);
+  --title-grad-3: rgba(200, 210, 255, 0.85);
+  --proj-card-bg: rgba(255, 255, 255, 0.04);
+  --proj-card-border: rgba(255, 255, 255, 0.08);
+  --proj-card-hover-border: rgba(255, 255, 255, 0.14);
+  --proj-card-inset: rgba(0, 0, 0, 0.2);
+  --proj-media-bg: rgba(0, 0, 0, 0.35);
+  --proj-title: rgba(255, 255, 255, 0.95);
+  --proj-desc: rgba(255, 255, 255, 0.48);
+  --proj-chip-bg: rgba(255, 255, 255, 0.06);
+  --proj-chip-border: rgba(255, 255, 255, 0.08);
+  --proj-chip-fg: rgba(255, 255, 255, 0.65);
+  --proj-btn-bg: rgba(255, 255, 255, 0.06);
+  --proj-btn-fg: rgba(255, 255, 255, 0.85);
+  --proj-btn-border: rgba(255, 255, 255, 0.08);
+  --proj-btn-hover: rgba(255, 255, 255, 0.1);
+}
+
+/* Listing pages (about / projects / academic) — theme-aware surfaces */
+html[data-color-theme="light"] {
+  --list-ink-strong: #1a2330;
+  --list-ink: #3d4f5f;
+  --list-ink-muted: #64748b;
+  --list-surface: rgba(255, 255, 255, 0.88);
+  --list-surface-mid: rgba(255, 255, 255, 0.78);
+  --list-surface-soft: rgba(255, 255, 255, 0.48);
+  --list-border: rgba(89, 111, 138, 0.12);
+  --list-border-strong: rgba(255, 255, 255, 0.98);
+  --list-marquee-fade: #eef3f6;
+  --list-blob-teal: rgba(0, 185, 146, 0.26);
+  --list-blob-slate: rgba(89, 111, 138, 0.24);
+  --list-grid-line: rgba(89, 111, 138, 0.06);
+}
+
+html[data-color-theme="dark"] {
+  --list-ink-strong: rgba(255, 255, 255, 0.96);
+  --list-ink: rgba(255, 255, 255, 0.82);
+  --list-ink-muted: rgba(255, 255, 255, 0.52);
+  --list-surface: rgba(255, 255, 255, 0.06);
+  --list-surface-mid: rgba(255, 255, 255, 0.05);
+  --list-surface-soft: rgba(255, 255, 255, 0.03);
+  --list-border: rgba(255, 255, 255, 0.1);
+  --list-border-strong: rgba(255, 255, 255, 0.14);
+  --list-marquee-fade: #121212;
+  --list-blob-teal: rgba(63, 94, 251, 0.22);
+  --list-blob-slate: rgba(252, 70, 107, 0.14);
+  --list-grid-line: rgba(255, 255, 255, 0.05);
+}
+
+html[data-color-theme="light"] {
+  --shell-bg: #e6e9f2;
+  --shell-fg: rgba(22, 24, 34, 0.94);
+  --shell-eyebrow: rgba(55, 60, 78, 0.55);
+  --shell-subtitle: rgba(55, 60, 78, 0.62);
+  --shell-rule: rgba(40, 44, 62, 0.28);
+  --shell-glow-1: rgba(99, 130, 255, 0.16);
+  --shell-glow-2: rgba(236, 72, 153, 0.1);
+  --shell-glow-3: rgba(16, 185, 129, 0.09);
+  --title-grad-1: #141826;
+  --title-grad-2: rgba(40, 48, 72, 0.88);
+  --title-grad-3: rgba(79, 70, 229, 0.75);
+  --proj-card-bg: rgba(255, 255, 255, 0.78);
+  --proj-card-border: rgba(0, 0, 0, 0.06);
+  --proj-card-hover-border: rgba(0, 0, 0, 0.1);
+  --proj-card-inset: rgba(255, 255, 255, 0.5);
+  --proj-media-bg: rgba(0, 0, 0, 0.06);
+  --proj-title: rgba(18, 20, 30, 0.96);
+  --proj-desc: rgba(45, 50, 68, 0.72);
+  --proj-chip-bg: rgba(255, 255, 255, 0.9);
+  --proj-chip-border: rgba(0, 0, 0, 0.08);
+  --proj-chip-fg: rgba(45, 50, 68, 0.78);
+  --proj-btn-bg: rgba(0, 0, 0, 0.04);
+  --proj-btn-fg: rgba(30, 32, 44, 0.88);
+  --proj-btn-border: rgba(0, 0, 0, 0.08);
+  --proj-btn-hover: rgba(0, 0, 0, 0.07);
+}
+
+/* :root {
+  font-family: "Poppins", sans-serif;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+  */
+body {
+  background-color: var(--shell-bg);
+  color: var(--shell-fg);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadein {
+  -webkit-animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+.main_page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #121212;
+  transition: background-color 0.4s ease;
+}
+
+html[data-color-theme="light"] .main_page {
+  background: linear-gradient(
+    165deg,
+    #eef0fb 0%,
+    #f3f4fb 38%,
+    #f8f6fc 72%,
+    #eef2fb 100%
+  );
+}
+
+/* Depth behind hero */
+.main_page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 85% 55% at 15% -5%, rgba(63, 94, 251, 0.14), transparent 58%),
+    radial-gradient(ellipse 55% 45% at 92% 35%, rgba(252, 70, 107, 0.09), transparent 52%),
+    radial-gradient(ellipse 50% 40% at 48% 105%, rgba(21, 153, 87, 0.06), transparent 50%);
+  transition: opacity 0.45s ease;
+}
+
+html[data-color-theme="light"] .main_page::before {
+  opacity: 0.35;
+}
+
+/* Ultra-light grain — dark home only */
+.main_page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  transition: opacity 0.45s ease;
+}
+
+html[data-color-theme="light"] .main_page::after {
+  opacity: 0.02;
+}
+.hidden {
+  opacity: 0;
+}
+
+/* Hebi /experience — single viewport, no page scroll */
+html.hebi-experience-lock,
+body.hebi-experience-lock {
+  overflow: hidden;
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+/* /experience + mouse: hide system cursor everywhere (Dock is outside HebiSuperHome root) */
+html.hebi-experience-fine-pointer,
+html.hebi-experience-fine-pointer body {
+  cursor: none !important;
+}
+
+/* Anchors/buttons often pull UA / Tailwind cursor:pointer — hide so only the custom ring shows */
+html.hebi-experience-fine-pointer :is(a, button, [role="button"], summary, label[for], input[type="submit"]) {
+  cursor: none !important;
+}
+
+html.hebi-experience-fine-pointer .dock-cont,
+html.hebi-experience-fine-pointer .dock-cont * {
+  cursor: none !important;
+}

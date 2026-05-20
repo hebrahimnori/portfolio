@@ -1,0 +1,102 @@
+/* Terminal-style project tiles (Parsa / dark only) */
+.card {
+  padding: 0;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(99, 130, 255, 0.06) inset,
+    0 20px 40px -28px rgba(0, 0, 0, 0.7);
+}
+
+.card::before {
+  box-shadow: 0 0 0 1px rgba(99, 130, 255, 0.35);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 130, 255, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(99, 130, 255, 0.12) inset,
+    0 24px 48px -24px rgba(63, 94, 251, 0.15);
+}
+
+.cardInset {
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.mediaFrame {
+  margin: 10px 10px 0;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+}
+
+.kindLabel {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.kindDot {
+  box-shadow: 0 0 0 2px rgba(18, 18, 18, 0.95);
+}
+
+.kindDot[data-kind="case"] {
+  background: rgba(99, 130, 255, 0.95);
+}
+
+.kindDot[data-kind="project"] {
+  background: rgba(252, 102, 140, 0.9);
+}
+
+.kindDot[data-kind="design"] {
+  background: rgba(180, 195, 255, 0.85);
+}
+
+.title {
+  font-family: "Tiny5", system-ui, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.desc {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-line-clamp: 4;
+}
+
+.skillLine {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.6875rem;
+  color: rgba(99, 130, 255, 0.7);
+}
+
+.skillLine::before {
+  content: "[ ";
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.skillLine::after {
+  content: " ]";
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.cta {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: rgba(180, 195, 255, 0.9);
+}
+
+.card:hover .cta {
+  color: rgba(252, 102, 140, 0.95);
+}

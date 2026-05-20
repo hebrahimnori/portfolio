@@ -1,0 +1,402 @@
+/* Hebi super home — single viewport, mouse-driven (no scroll) */
+.root {
+  --hebi-teal: #00b992;
+  --hebi-slate: #596f8a;
+  --hebi-teal-soft: rgba(0, 185, 146, 0.22);
+  --hebi-slate-soft: rgba(89, 111, 138, 0.2);
+  --hebi-bg: #eef3f6;
+  --hebi-bg-deep: #e2eaef;
+  --hebi-ink: #3d4f5f;
+  --mix: 0.5;
+
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  background: linear-gradient(
+    165deg,
+    var(--hebi-bg) 0%,
+    color-mix(in srgb, var(--hebi-bg) 88%, var(--hebi-teal)) 45%,
+    color-mix(in srgb, var(--hebi-bg-deep) 90%, var(--hebi-slate)) 100%
+  );
+  color: var(--hebi-ink);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+/* cursor: none comes from globals (html.hebi-experience-fine-pointer) so Dock matches too */
+
+.root::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse 55% 45% at calc(15% + var(--mix) * 12%) 22%,
+      var(--hebi-teal-soft),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 50% 42% at calc(88% - var(--mix) * 10%) 72%,
+      var(--hebi-slate-soft),
+      transparent 55%
+    );
+  transition: background 0.4s ease;
+}
+
+.root::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.reduced .curtain {
+  display: none;
+}
+
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  will-change: transform;
+}
+
+.curtainBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--hebi-bg);
+  pointer-events: none;
+}
+
+.loader {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+}
+
+.loaderLogoSpacer {
+  display: block;
+  width: clamp(8rem, 30vmin, 12.5rem);
+  aspect-ratio: 266 / 382;
+  pointer-events: none;
+}
+
+.loaderLine {
+  display: block;
+  width: min(10rem, 36vw);
+  height: 2px;
+  background: linear-gradient(90deg, var(--hebi-teal), var(--hebi-slate));
+  transform-origin: 0 50%;
+}
+
+.topBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: max(1.6rem, calc(env(safe-area-inset-top) + 1.1rem)) clamp(1rem, 3.5vw, 1.75rem) 0;
+  pointer-events: none;
+}
+
+.brandBlock {
+  pointer-events: none;
+  padding-left: 0.85rem;
+  border-left: 1px solid color-mix(in srgb, var(--hebi-teal) 55%, transparent);
+}
+
+.brandName {
+  margin: 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.85rem, 4.8vw, 2.5rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--hebi-slate) 75%, var(--hebi-teal) 12%);
+}
+
+.brandSub {
+  margin: 0.4rem 0 0;
+  max-width: min(20rem, 90vw);
+  font-size: clamp(0.52rem, 1.2vw, 0.62rem);
+  font-weight: 500;
+  font-style: normal;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--hebi-slate) 58%, transparent);
+}
+
+.brandSubLink {
+  pointer-events: auto;
+  cursor: none;
+  color: color-mix(in srgb, var(--hebi-teal) 88%, var(--hebi-slate));
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--hebi-teal) 35%, transparent);
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    color: var(--hebi-teal);
+    border-bottom-color: color-mix(in srgb, var(--hebi-teal) 65%, transparent);
+  }
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  --mix: 0.5;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.blobTeal {
+  left: 8%;
+  top: 12%;
+  width: min(52vw, 420px);
+  height: min(52vw, 420px);
+  background: rgba(0, 185, 146, 0.28);
+}
+
+.blobSlate {
+  right: 6%;
+  bottom: 14%;
+  width: min(48vw, 380px);
+  height: min(48vw, 380px);
+  background: rgba(89, 111, 138, 0.26);
+}
+
+.grid {
+  position: absolute;
+  inset: -20%;
+  background-image:
+    linear-gradient(rgba(89, 111, 138, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(89, 111, 138, 0.06) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 70% 65% at 50% 48%, black 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 48%, black 0%, transparent 72%);
+  pointer-events: none;
+}
+
+.orbitField {
+  position: relative;
+  width: min(88vmin, 520px);
+  height: min(88vmin, 520px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1400px;
+}
+
+.ring {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--hebi-teal) 35%, transparent);
+  pointer-events: none;
+  transform-origin: 50% 50%;
+}
+
+.ringInner {
+  inset: 14%;
+  border-color: color-mix(in srgb, var(--hebi-slate) 32%, transparent);
+}
+
+.satellite {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: rotate(var(--orbit-angle, 0deg)) translateY(calc(-1 * min(42vmin, 250px)));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  pointer-events: none;
+}
+
+.satelliteDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hebi-teal);
+  box-shadow: 0 0 14px rgba(0, 185, 146, 0.55);
+}
+
+.satelliteLabel {
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--hebi-slate) 80%, transparent);
+  white-space: nowrap;
+  transform: rotate(calc(-1 * var(--orbit-angle, 0deg)));
+}
+
+.logoWrap {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.logoGlow {
+  position: absolute;
+  width: min(52vmin, 320px);
+  height: min(52vmin, 320px);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 185, 146, 0.22) 0%,
+    rgba(89, 111, 138, 0.12) 42%,
+    transparent 68%
+  );
+  pointer-events: none;
+}
+
+.logoSvgWrap {
+  display: block;
+  width: clamp(8rem, 30vmin, 12.5rem);
+  transform-origin: 50% 50%;
+  will-change: transform, opacity, filter;
+  filter: drop-shadow(0 28px 48px rgba(89, 111, 138, 0.18));
+}
+
+.logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: color-mix(
+    in srgb,
+    var(--hebi-slate) calc(72% + var(--mix, 0.5) * 28%),
+    var(--hebi-teal)
+  );
+}
+
+.footArt {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(5rem, 12vh, 6.25rem);
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.88;
+}
+
+.footOrbit {
+  position: relative;
+  width: min(5.75rem, 36vw);
+  height: min(3rem, 19vw);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Single upward-opening semicircle; no parallax — transform only from GSAP rotation */
+.footOrbitHalf {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  max-height: 100%;
+  box-sizing: border-box;
+  border-radius: 9999px 9999px 0 0;
+  border: 1px dashed color-mix(in srgb, var(--hebi-teal) 52%, transparent);
+  border-bottom: none;
+  box-shadow: 0 -12px 28px color-mix(in srgb, var(--hebi-teal) 12%, transparent);
+  opacity: 0;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
+}
+
+.footOrbitDot {
+  position: absolute;
+  left: 50%;
+  bottom: 1px;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--hebi-teal), var(--hebi-slate));
+  box-shadow:
+    0 0 12px color-mix(in srgb, var(--hebi-teal) 55%, transparent),
+    inset 0 0 1px rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.root.reduced .footOrbitHalf {
+  opacity: 0.92 !important;
+  transform: none !important;
+}
+
+.root.reduced .footOrbitDot {
+  opacity: 0.88 !important;
+  transform: none !important;
+}
+
+@media (max-width: 520px) {
+  .satellite {
+    transform: rotate(var(--orbit-angle, 0deg)) translateY(calc(-1 * min(38vmin, 200px)));
+  }
+
+  .brandSub {
+    max-width: min(18rem, 88vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoSvgWrap,
+  .brandBlock {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .satellite {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .footArt {
+    opacity: 1 !important;
+    transform: translateX(-50%) scale(1) !important;
+  }
+
+  .logoWrap {
+    transform: none !important;
+  }
+
+  .ring {
+    animation: none !important;
+  }
+}

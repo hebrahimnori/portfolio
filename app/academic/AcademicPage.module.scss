@@ -1,0 +1,100 @@
+.list {
+  max-width: 760px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.15rem, 2.5vw, 1.5rem);
+}
+
+.card {
+  position: relative;
+  border-radius: 1.15rem;
+  padding: clamp(1.25rem, 3vw, 1.65rem) clamp(1.25rem, 3vw, 1.75rem);
+  background: var(--proj-card-bg);
+  border: 1px solid var(--proj-card-border);
+  box-shadow:
+    0 0 0 1px var(--proj-card-inset) inset,
+    0 18px 40px -20px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.period {
+  font-family: "Tiny5", system-ui, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--shell-eyebrow);
+  margin-bottom: 0.5rem;
+}
+
+.cardTitle {
+  font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--proj-title);
+  margin: 0 0 0.35rem;
+}
+
+.institution {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--title-grad-3);
+  margin: 0 0 0.75rem;
+}
+
+.summary {
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--proj-desc);
+  margin: 0;
+}
+
+/* Parsa — changelog / log entries */
+.parsaCard {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(99, 130, 255, 0.06) inset,
+    0 18px 36px -24px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.logPrefix {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: rgba(99, 130, 255, 0.75);
+}
+
+.parsaCard .period {
+  font-family: "Tiny5", system-ui, sans-serif;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.parsaCard .cardTitle {
+  font-family: "Tiny5", system-ui, sans-serif;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.parsaCard .institution {
+  color: rgba(252, 102, 140, 0.85);
+  font-size: 0.8125rem;
+}
+
+.parsaCard .summary {
+  font-size: 0.75rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.5);
+}

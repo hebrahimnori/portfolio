@@ -1,0 +1,342 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.terminal {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(99, 130, 255, 0.08) inset,
+    0 24px 48px -32px rgba(0, 0, 0, 0.8);
+}
+
+.termBar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.termDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.termDot[data-tone="r"] {
+  background: #ff5f57;
+}
+
+.termDot[data-tone="y"] {
+  background: #febc2e;
+}
+
+.termDot[data-tone="g"] {
+  background: #28c840;
+}
+
+.termTitle {
+  margin-left: 0.35rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.termBody {
+  padding: clamp(1rem, 2.5vw, 1.35rem);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: clamp(0.75rem, 1.8vw, 0.8125rem);
+  line-height: 1.6;
+}
+
+.line {
+  margin: 0 0 0.25rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.cmd {
+  color: rgba(99, 130, 255, 0.9);
+  margin-right: 0.35rem;
+}
+
+.out {
+  margin: 0 0 0.85rem;
+  padding-left: 1.1rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.outAccent {
+  margin: 0 0 0.85rem;
+  padding-left: 1.1rem;
+  color: rgba(180, 195, 255, 0.92);
+}
+
+.pkgRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  padding-left: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.pkgName {
+  color: rgba(252, 102, 140, 0.9);
+}
+
+.pkgVer {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.pkgMeta {
+  margin: 0 0 0.85rem;
+  padding-left: 1.1rem;
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.comment {
+  margin: 0.5rem 0 0;
+  padding-left: 1.1rem;
+  color: rgba(99, 130, 255, 0.65);
+  font-style: italic;
+}
+
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.65rem;
+  font-family: "Tiny5", system-ui, sans-serif;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.sectionMark {
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background: linear-gradient(135deg, rgba(180, 200, 255, 0.9), rgba(252, 110, 140, 0.8));
+  box-shadow: 0 0 8px rgba(140, 170, 255, 0.35);
+}
+
+.statTrack {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+@media (max-width: 640px) {
+  .statTrack {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.25rem;
+  }
+}
+
+.statCard {
+  position: relative;
+  min-width: 0;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.statCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 10px 10px 0 0;
+}
+
+.statBlue::before {
+  background: linear-gradient(90deg, rgba(99, 130, 255, 0.9), transparent);
+}
+
+.statPink::before {
+  background: linear-gradient(90deg, rgba(252, 102, 140, 0.85), transparent);
+}
+
+.statSlate::before {
+  background: linear-gradient(90deg, rgba(180, 195, 255, 0.5), transparent);
+}
+
+@media (max-width: 640px) {
+  .statCard {
+    flex: 0 0 min(168px, 58vw);
+    scroll-snap-align: start;
+  }
+}
+
+.statKey {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.statVal {
+  margin: 0;
+  font-family: "Tiny5", system-ui, sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.statSub {
+  margin: 0.35rem 0 0;
+  font-size: 0.625rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.stackZone {
+  position: relative;
+  padding: 0.65rem 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.marqueeFade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    #121212 0%,
+    transparent 12%,
+    transparent 88%,
+    #121212 100%
+  );
+}
+
+.marqueeTrack {
+  overflow: hidden;
+}
+
+.marqueeInner {
+  display: flex;
+  width: max-content;
+  gap: 1.75rem;
+  padding-inline: 1rem;
+  animation: parsaMarquee 22s linear infinite;
+}
+
+@keyframes parsaMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marqueeItem {
+  flex-shrink: 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.marqueeItem::before {
+  content: "› ";
+  color: rgba(99, 130, 255, 0.85);
+}
+
+.marqueeItem::after {
+  content: " ·";
+  margin-left: 1.75rem;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.commandBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(99, 130, 255, 0.25);
+  background: linear-gradient(
+    115deg,
+    rgba(30, 40, 70, 0.65) 0%,
+    rgba(20, 22, 35, 0.9) 50%,
+    rgba(60, 30, 50, 0.4) 100%
+  );
+}
+
+.commandPitch {
+  margin: 0;
+  flex: 1 1 12rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.commandActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+.commandPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #121212;
+  background: rgba(200, 215, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.commandLink {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .commandPrimary:hover {
+    background: #fff;
+    transform: translateY(-1px);
+  }
+
+  .commandLink:hover {
+    color: rgba(180, 195, 255, 0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marqueeInner {
+    animation: none;
+  }
+}

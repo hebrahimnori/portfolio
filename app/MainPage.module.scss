@@ -1,0 +1,151 @@
+.scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.scene :global(canvas) {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.title_on_main {
+  position: absolute;
+  z-index: 2;
+  top: clamp(3rem, 10vw, 5rem);
+  left: clamp(1.5rem, 6vw, 5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: min(96vw, 52rem);
+}
+
+.heroBlock {
+  position: relative;
+  padding-left: 1.15rem;
+}
+
+/* Vertical rail — ties eyebrow + headline into one “console” block */
+.heroBlock::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+  bottom: 0.2rem;
+  width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(200, 215, 255, 0.95) 0%,
+    rgba(99, 130, 255, 0.45) 45%,
+    rgba(252, 102, 140, 0.35) 85%,
+    transparent 100%
+  );
+  box-shadow: 0 0 18px rgba(120, 160, 255, 0.25);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: "Tiny5", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 0.65rem;
+}
+
+.eyebrowMark {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: linear-gradient(135deg, rgba(180, 200, 255, 0.95), rgba(252, 110, 140, 0.85));
+  box-shadow: 0 0 12px rgba(180, 195, 255, 0.45);
+  flex-shrink: 0;
+}
+
+/* Tiny5 headline + slow-moving gradient (still readable) */
+.typewriterWrapper {
+  display: inline-block;
+  font-family: "Tiny5", system-ui, sans-serif;
+  font-size: clamp(1.85rem, 4.75vw, 2.85rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1.45;
+  text-transform: uppercase;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  background: linear-gradient(
+    110deg,
+    #ffffff 0%,
+    rgba(230, 235, 255, 0.92) 35%,
+    rgba(180, 195, 255, 0.95) 55%,
+    rgba(255, 255, 255, 0.88) 100%
+  );
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: heroGradientDrift 14s ease-in-out infinite;
+  filter: drop-shadow(0 2px 16px rgba(0, 0, 0, 0.6))
+    drop-shadow(0 0 28px rgba(100, 140, 255, 0.12));
+}
+
+@keyframes heroGradientDrift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.typewriterWrapper *:not(.typewriterCursor) {
+  background-image: inherit;
+  background-size: inherit;
+  background-position: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+
+.typewriterCursor {
+  display: inline-block;
+  font-family: "Tiny5", system-ui, sans-serif;
+  font-size: 0.65em;
+  font-weight: 400;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  line-height: 1;
+  color: rgba(190, 205, 255, 0.85) !important;
+  -webkit-text-fill-color: rgba(190, 205, 255, 0.85);
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  margin-left: 0.12em;
+  vertical-align: 0.08em;
+  filter: drop-shadow(0 0 8px rgba(140, 170, 255, 0.35));
+  animation: tw-blink 1.1s ease-in-out infinite;
+}
+
+@keyframes tw-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.2;
+  }
+}

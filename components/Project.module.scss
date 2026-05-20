@@ -1,0 +1,222 @@
+/* Modern project tile — floating glass, inset media, typographic stack */
+.card {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  border-radius: 22px;
+  padding: 1px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(248, 250, 252, 0.72) 45%,
+    rgba(238, 245, 243, 0.55) 100%
+  );
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.55) inset,
+    0 1px 1px rgba(15, 23, 42, 0.04),
+    0 12px 40px -20px rgba(61, 79, 95, 0.14),
+    0 40px 80px -48px rgba(61, 79, 95, 0.12);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.32, 1),
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.32, 1);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 0 0 1px rgba(0, 185, 146, 0.22);
+  transition: opacity 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.65) inset,
+    0 2px 4px rgba(15, 23, 42, 0.05),
+    0 20px 50px -24px rgba(61, 79, 95, 0.18),
+    0 56px 100px -52px rgba(0, 185, 146, 0.08);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.cardInset {
+  border-radius: 21px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  display: flex;
+  flex-direction: column;
+}
+
+.mediaFrame {
+  position: relative;
+  margin: 12px 12px 0;
+  border-radius: 15px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(160deg, #e8edf1 0%, #dfe8ea 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+}
+
+.mediaFrame img,
+.mediaFrame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.001);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .mediaFrame img,
+.card:hover .mediaFrame video {
+  transform: scale(1.045);
+}
+
+.body {
+  padding: 1.35rem 1.5rem 1.45rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.kindDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.95);
+}
+
+.kindDot[data-kind="design"] {
+  background: #00b992;
+}
+
+.kindDot[data-kind="case"] {
+  background: #596f8a;
+}
+
+.kindDot[data-kind="project"] {
+  background: #64748b;
+}
+
+.kindLabel {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--list-ink-muted, #64748b);
+}
+
+.title {
+  margin: 0;
+  font-family:
+    "Plus Jakarta Sans",
+    "IBM Plex Sans",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: clamp(1.125rem, 2.05vw, 1.375rem);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -0.035em;
+  font-feature-settings: "kern" 1, "liga" 1;
+  color: var(--proj-title, #0f172a);
+}
+
+.desc {
+  margin: 0;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 0.90625rem;
+  font-weight: 400;
+  line-height: 1.58;
+  letter-spacing: -0.015em;
+  color: var(--proj-desc, #475569);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.skillLine {
+  margin: 0.1rem 0 0;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+  color: var(--list-ink-muted, #64748b);
+}
+
+.cta {
+  margin-top: 0.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #0d9488;
+}
+
+.ctaArrow {
+  display: inline-block;
+  transform: translateX(0);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .cta {
+  color: #00b992;
+}
+
+.card:hover .ctaArrow {
+  transform: translateX(4px);
+}
+
+:global(html[data-color-theme="dark"]) .card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.04) 45%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  box-shadow:
+    0 0 0 1px var(--proj-card-border) inset,
+    0 12px 40px -20px rgba(0, 0, 0, 0.45),
+    0 40px 80px -48px rgba(63, 94, 251, 0.08);
+}
+
+:global(html[data-color-theme="dark"]) .card:hover {
+  box-shadow:
+    0 0 0 1px var(--proj-card-hover-border) inset,
+    0 20px 50px -24px rgba(0, 0, 0, 0.5),
+    0 56px 100px -52px rgba(0, 185, 146, 0.1);
+}
+
+:global(html[data-color-theme="dark"]) .cardInset {
+  background: var(--proj-card-bg);
+}
+
+:global(html[data-color-theme="dark"]) .mediaFrame {
+  background: var(--proj-media-bg);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+}
+
+:global(html[data-color-theme="dark"]) .kindDot {
+  box-shadow: 0 0 0 2px rgba(18, 18, 18, 0.9);
+}

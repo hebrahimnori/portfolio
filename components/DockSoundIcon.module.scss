@@ -1,0 +1,86 @@
+.icon {
+  width: inherit;
+  height: inherit;
+  display: block;
+  overflow: visible;
+}
+
+.waves,
+.muteBars {
+  transform-origin: 17px 12px;
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s cubic-bezier(0.22, 1, 0.32, 1);
+}
+
+.waveA,
+.waveB {
+  fill: none;
+}
+
+.muteBars .bar {
+  transform-origin: center;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.32, 1);
+}
+
+/* Sound on — waves in, pause bars out */
+.isOn .waves {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.isOn .muteBars {
+  opacity: 0;
+  transform: scale(0.75);
+  pointer-events: none;
+}
+
+.isOn .waveA {
+  animation: dockWave 1.1s ease-in-out infinite;
+}
+
+.isOn .waveB {
+  animation: dockWave 1.1s ease-in-out 0.2s infinite;
+}
+
+/* Sound off — pause bars in, waves out */
+.isOff .waves {
+  opacity: 0;
+  transform: scale(0.82);
+}
+
+.isOff .muteBars {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.isOff .bar {
+  transform: scaleY(1);
+}
+
+.isOff .muteBars .bar:first-child {
+  transition-delay: 0.04s;
+}
+
+@keyframes dockWave {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waves,
+  .muteBars {
+    transition: opacity 0.15s ease;
+  }
+
+  .isOn .waveA,
+  .isOn .waveB {
+    animation: none;
+    opacity: 0.85;
+  }
+}

@@ -1,3 +1,114 @@
+.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #121212;
+}
+
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #121212;
+  will-change: transform, opacity;
+}
+
+.curtainBg {
+  position: absolute;
+  inset: 0;
+  background: #121212;
+  pointer-events: none;
+}
+
+.boot {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 22rem);
+  padding: clamp(1.25rem, 4vw, 1.5rem);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(8, 10, 18, 0.88);
+  box-shadow:
+    0 0 0 1px rgba(99, 130, 255, 0.1) inset,
+    0 24px 48px -24px rgba(0, 0, 0, 0.75);
+}
+
+.bootBar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bootDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.bootDot:nth-child(1) {
+  background: #ff5f57;
+}
+
+.bootDot:nth-child(2) {
+  background: #febc2e;
+}
+
+.bootDot:nth-child(3) {
+  background: #28c840;
+}
+
+.bootTitle {
+  margin-left: 0.25rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.5625rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.bootLine {
+  margin: 0 0 0.35rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: clamp(0.6875rem, 2.2vw, 0.75rem);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.55);
+  overflow-wrap: break-word;
+}
+
+.bootPrompt {
+  color: rgba(99, 130, 255, 0.9);
+}
+
+.bootOk {
+  color: rgba(40, 200, 64, 0.85);
+}
+
+.loaderLine {
+  display: block;
+  margin-top: 0.75rem;
+  height: 2px;
+  width: 100%;
+  transform-origin: 0 50%;
+  background: linear-gradient(
+    90deg,
+    rgba(99, 130, 255, 0.95),
+    rgba(252, 102, 140, 0.65)
+  );
+  border-radius: 999px;
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+}
+
 .scene {
   position: absolute;
   inset: 0;
@@ -11,37 +122,15 @@
   height: 100% !important;
 }
 
-.title_on_main {
+.hero {
   position: absolute;
   z-index: 2;
   top: clamp(2.5rem, 10vw, 5rem);
   left: clamp(1rem, 5vw, 5rem);
   right: clamp(1rem, 4vw, 2rem);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   max-width: min(52rem, calc(100% - 2rem));
-  box-sizing: border-box;
+  opacity: 0;
   pointer-events: none;
-}
-
-@media (max-width: 640px) {
-  .title_on_main {
-    top: max(2rem, env(safe-area-inset-top));
-    left: max(1rem, env(safe-area-inset-left));
-    right: max(1rem, env(safe-area-inset-right));
-  }
-
-  .typewriterWrapper {
-    font-size: clamp(1.35rem, 5.8vw, 1.85rem);
-    letter-spacing: 0.1em;
-    line-height: 1.35;
-  }
-
-  .eyebrow {
-    font-size: 0.625rem;
-    letter-spacing: 0.22em;
-  }
 }
 
 .heroBlock {
@@ -49,9 +138,7 @@
   padding-left: 1.15rem;
 }
 
-/* Vertical rail — ties eyebrow + headline into one “console” block */
-.heroBlock::before {
-  content: "";
+.heroRail {
   position: absolute;
   left: 0;
   top: 0.15rem;
@@ -66,6 +153,7 @@
     transparent 100%
   );
   box-shadow: 0 0 18px rgba(120, 160, 255, 0.25);
+  transform-origin: 0 0;
 }
 
 .eyebrow {
@@ -73,8 +161,8 @@
   align-items: center;
   gap: 0.65rem;
   font-family: "Tiny5", system-ui, sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.28em;
+  font-size: clamp(0.625rem, 2.8vw, 0.75rem);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
   margin: 0 0 0.65rem;
@@ -90,17 +178,15 @@
   flex-shrink: 0;
 }
 
-/* Tiny5 headline + slow-moving gradient (still readable) */
 .typewriterWrapper {
   display: inline-block;
   font-family: "Tiny5", system-ui, sans-serif;
-  font-size: clamp(1.85rem, 4.75vw, 2.85rem);
+  font-size: clamp(1.35rem, 5.8vw, 2.85rem);
   font-weight: 400;
-  letter-spacing: 0.14em;
-  line-height: 1.45;
+  letter-spacing: clamp(0.08em, 1.2vw, 0.14em);
+  line-height: 1.4;
   text-transform: uppercase;
   -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: unset;
   background: linear-gradient(
     110deg,
     #ffffff 0%,
@@ -109,16 +195,14 @@
     rgba(255, 255, 255, 0.88) 100%
   );
   background-size: 220% 100%;
-  background-position: 0% 50%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: heroGradientDrift 14s ease-in-out infinite;
-  filter: drop-shadow(0 2px 16px rgba(0, 0, 0, 0.6))
-    drop-shadow(0 0 28px rgba(100, 140, 255, 0.12));
+  animation: parsaHeroDrift 14s ease-in-out infinite;
+  filter: drop-shadow(0 2px 16px rgba(0, 0, 0, 0.6));
 }
 
-@keyframes heroGradientDrift {
+@keyframes parsaHeroDrift {
   0%,
   100% {
     background-position: 0% 50%;
@@ -137,27 +221,14 @@
   color: transparent;
   font-family: inherit;
   font-size: inherit;
-  font-weight: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
 }
 
 .typewriterCursor {
-  display: inline-block;
-  font-family: "Tiny5", system-ui, sans-serif;
-  font-size: 0.65em;
-  font-weight: 400;
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: unset;
-  line-height: 1;
   color: rgba(190, 205, 255, 0.85) !important;
   -webkit-text-fill-color: rgba(190, 205, 255, 0.85);
   background: none !important;
-  -webkit-background-clip: unset !important;
-  background-clip: unset !important;
-  margin-left: 0.12em;
-  vertical-align: 0.08em;
-  filter: drop-shadow(0 0 8px rgba(140, 170, 255, 0.35));
   animation: tw-blink 1.1s ease-in-out infinite;
 }
 
@@ -169,5 +240,11 @@
   50%,
   100% {
     opacity: 0.2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriterWrapper {
+    animation: none;
   }
 }

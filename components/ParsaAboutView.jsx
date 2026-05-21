@@ -1,8 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
 
 import styles from "./ParsaAboutView.module.scss";
+import { useParsaAboutEntrance } from "./useParsaAboutEntrance";
 
 const TONE_CLASS = {
   blue: styles.statBlue,
@@ -11,9 +13,12 @@ const TONE_CLASS = {
 };
 
 export default function ParsaAboutView({ about, skillMarquee }) {
+  const rootRef = useRef(null);
+  useParsaAboutEntrance(rootRef);
+
   return (
-    <div className={styles.root}>
-      <section className={styles.terminal} aria-label="Profile">
+    <div ref={rootRef} className={styles.root}>
+      <section className={styles.terminal} data-parsa-terminal aria-label="Profile">
         <div className={styles.termBar}>
           <span className={styles.termDot} data-tone="r" />
           <span className={styles.termDot} data-tone="y" />
@@ -21,21 +26,27 @@ export default function ParsaAboutView({ about, skillMarquee }) {
           <span className={styles.termTitle}>parsa@portfolio — zsh</span>
         </div>
         <div className={styles.termBody}>
-          <p className={styles.line}>
+          <p className={styles.line} data-parsa-term-line>
             <span className={styles.cmd}>$</span> whoami
           </p>
-          <p className={styles.out}>{about.name}</p>
-          <p className={styles.line}>
+          <p className={styles.out} data-parsa-term-out>
+            {about.name ?? "Parsa"}
+          </p>
+          <p className={styles.line} data-parsa-term-line>
             <span className={styles.cmd}>$</span> cat role.txt
           </p>
-          <p className={styles.outAccent}>{about.roleLine}</p>
-          <p className={styles.line}>
+          <p className={styles.outAccent} data-parsa-term-out>
+            {about.roleLine}
+          </p>
+          <p className={styles.line} data-parsa-term-line>
             <span className={styles.cmd}>$</span> {about.aboutTitle.replace("$ ", "")}
           </p>
-          <p className={styles.out}>{about.aboutBody}</p>
+          <p className={styles.out} data-parsa-term-out>
+            {about.aboutBody}
+          </p>
           {about.employer ? (
-            <>
-              <p className={styles.line}>
+            <div data-parsa-pkg>
+              <p className={styles.line} data-parsa-term-line>
                 <span className={styles.cmd}>$</span> npm list --depth=0
               </p>
               <div className={styles.pkgRow}>
@@ -43,23 +54,25 @@ export default function ParsaAboutView({ about, skillMarquee }) {
                 <span className={styles.pkgVer}>{about.employer.role}</span>
               </div>
               <p className={styles.pkgMeta}>{about.employer.focus}</p>
-            </>
+            </div>
           ) : null}
-          <p className={styles.comment}>{about.quoteLine}</p>
+          <p className={styles.comment} data-parsa-comment>
+            {about.quoteLine}
+          </p>
         </div>
       </section>
 
-      <section className={styles.metrics} aria-label="Focus">
-        <p className={styles.sectionLabel}>
+      <section className={styles.metrics} data-parsa-metrics aria-label="Focus">
+        <p className={styles.sectionLabel} data-parsa-stat-label>
           <span className={styles.sectionMark} aria-hidden />
           metrics
         </p>
         <div className={styles.statTrack}>
-          {about.stats.map((s, i) => (
+          {about.stats.map((s) => (
             <article
               key={s.id}
               className={`${styles.statCard} ${TONE_CLASS[s.tone] ?? ""}`}
-              style={{ "--i": i }}
+              data-parsa-stat
             >
               <span className={styles.statKey}>{s.id}</span>
               <h3 className={styles.statVal}>{s.label}</h3>
@@ -69,7 +82,7 @@ export default function ParsaAboutView({ about, skillMarquee }) {
         </div>
       </section>
 
-      <section className={styles.stackZone} aria-label="Stack">
+      <section className={styles.stackZone} data-parsa-stack aria-label="Stack">
         <p className={styles.sectionLabel}>
           <span className={styles.sectionMark} aria-hidden />
           stack --watch
@@ -86,7 +99,7 @@ export default function ParsaAboutView({ about, skillMarquee }) {
         </div>
       </section>
 
-      <footer className={styles.commandBar}>
+      <footer className={styles.commandBar} data-parsa-command>
         <p className={styles.commandPitch}>
           <span className={styles.cmd}>$</span> {about.footerLine}
         </p>

@@ -14,6 +14,9 @@
 
 /* Shared page shell (projects / photography / academic) + project cards */
 html {
+  /* Space above fixed dock (h-16 + pb + lift) on listing pages */
+  --dock-page-pad: max(7.75rem, calc(env(safe-area-inset-bottom, 0px) + 6.75rem));
+
   --shell-bg: #121212;
   --shell-fg: rgba(255, 255, 255, 0.92);
   --shell-eyebrow: rgba(255, 255, 255, 0.45);
@@ -113,6 +116,18 @@ body {
   background-color: var(--shell-bg);
   color: var(--shell-fg);
   transition: background-color 0.35s ease, color 0.35s ease;
+  overflow-x: clip;
+}
+
+/* Listing pages (scrollable) — prevent horizontal bleed, respect safe areas */
+html:not(.hebi-experience-lock) {
+  overflow-x: clip;
+}
+
+html:not(.hebi-experience-lock) img,
+html:not(.hebi-experience-lock) video {
+  max-width: 100%;
+  height: auto;
 }
 @-webkit-keyframes fade-in {
   0% {

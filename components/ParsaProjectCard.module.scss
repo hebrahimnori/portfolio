@@ -1,50 +1,105 @@
-/* Terminal-style project tiles (Parsa / dark only) */
+/* Parsa project tiles — window chrome + readable body */
 .card {
   padding: 0;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 11px;
+  overflow: hidden;
+  background: rgba(10, 12, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.11);
   box-shadow:
-    0 0 0 1px rgba(99, 130, 255, 0.06) inset,
-    0 20px 40px -28px rgba(0, 0, 0, 0.7);
+    0 0 0 1px rgba(99, 130, 255, 0.07) inset,
+    0 16px 36px -24px rgba(0, 0, 0, 0.65);
+  min-width: 0;
 }
 
 .card::before {
-  box-shadow: 0 0 0 1px rgba(99, 130, 255, 0.35);
+  opacity: 0;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(99, 130, 255, 0.28);
+  transform: translateY(-3px);
+  border-color: rgba(99, 130, 255, 0.32);
   box-shadow:
-    0 0 0 1px rgba(99, 130, 255, 0.12) inset,
-    0 24px 48px -24px rgba(63, 94, 251, 0.15);
+    0 0 0 1px rgba(99, 130, 255, 0.14) inset,
+    0 22px 44px -20px rgba(63, 94, 251, 0.12);
+}
+
+.cardBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.65rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  min-width: 0;
+}
+
+.cardBarDots {
+  display: flex;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.cardBarDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.cardBarDot:nth-child(1) {
+  background: #ff5f57;
+}
+
+.cardBarDot:nth-child(2) {
+  background: #febc2e;
+}
+
+.cardBarDot:nth-child(3) {
+  background: #28c840;
+}
+
+.cardBarLabel {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.5625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cardInset {
-  border-radius: 9px;
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .mediaFrame {
-  margin: 10px 10px 0;
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: none;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  aspect-ratio: 16 / 10;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.body {
+  padding: clamp(0.9rem, 2.5vw, 1.15rem) clamp(0.95rem, 2.5vw, 1.2rem) clamp(1rem, 2.5vw, 1.2rem);
 }
 
 .kindLabel {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.625rem;
+  font-size: 0.5625rem;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  color: rgba(99, 130, 255, 0.75);
 }
 
 .kindDot {
-  box-shadow: 0 0 0 2px rgba(18, 18, 18, 0.95);
+  box-shadow: 0 0 0 2px rgba(12, 14, 22, 0.95);
 }
 
 .kindDot[data-kind="case"] {
@@ -60,41 +115,43 @@
 }
 
 .title {
-  font-family: "Tiny5", system-ui, sans-serif;
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: clamp(1rem, 2.8vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.94);
+  overflow-wrap: break-word;
 }
 
 .desc {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.75rem;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: clamp(0.75rem, 2.2vw, 0.875rem);
+  font-weight: 400;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.5);
-  -webkit-line-clamp: 4;
+  color: rgba(255, 255, 255, 0.52);
+  -webkit-line-clamp: 5;
+  overflow-wrap: break-word;
 }
 
 .skillLine {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.6875rem;
-  color: rgba(99, 130, 255, 0.7);
+  font-size: clamp(0.625rem, 2vw, 0.6875rem);
+  line-height: 1.45;
+  color: rgba(180, 195, 255, 0.65);
+  overflow-wrap: break-word;
 }
 
-.skillLine::before {
-  content: "[ ";
-  color: rgba(255, 255, 255, 0.25);
-}
-
+.skillLine::before,
 .skillLine::after {
-  content: " ]";
-  color: rgba(255, 255, 255, 0.25);
+  content: none;
 }
 
 .cta {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.75rem;
-  color: rgba(180, 195, 255, 0.9);
+  color: rgba(99, 130, 255, 0.9);
 }
 
 .card:hover .cta {

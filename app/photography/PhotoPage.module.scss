@@ -1,5 +1,10 @@
 .photoMasonry {
   column-gap: clamp(0.85rem, 2.5vw, 2rem);
+  min-width: 0;
+}
+
+.photoMasonry > * {
+  max-width: 100%;
 }
 
 @media (max-width: 479px) {

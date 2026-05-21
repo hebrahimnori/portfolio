@@ -2,7 +2,9 @@
   margin-bottom: clamp(2rem, 5vw, 4.25rem);
   max-width: min(46rem, 100%);
   padding-left: clamp(0.5rem, 2vw, 0.75rem);
+  padding-right: 0.25rem;
   border-left: 1px solid color-mix(in srgb, var(--hebi-teal, #00b992) 42%, transparent);
+  min-width: 0;
 }
 
 .eyebrow {

@@ -40,6 +40,16 @@ function Project({
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
     >
+      {isParsa ? (
+        <div className={p.cardBar}>
+          <div className={p.cardBarDots} aria-hidden>
+            <span className={p.cardBarDot} />
+            <span className={p.cardBarDot} />
+            <span className={p.cardBarDot} />
+          </div>
+          <span className={p.cardBarLabel}>{label}</span>
+        </div>
+      ) : null}
       <div className={p ? `${styles.cardInset} ${p.cardInset}` : styles.cardInset}>
         <div className={p ? `${styles.mediaFrame} ${p.mediaFrame}` : styles.mediaFrame}>
           {imageType === "photo" && (
@@ -59,16 +69,12 @@ function Project({
         </div>
 
         <div className={styles.body}>
-          <div className={styles.meta}>
-            <span
-              className={p ? `${styles.kindDot} ${p.kindDot}` : styles.kindDot}
-              data-kind={type}
-              aria-hidden
-            />
-            <span className={p ? `${styles.kindLabel} ${p.kindLabel}` : styles.kindLabel}>
-              {label}
-            </span>
-          </div>
+          {!isParsa ? (
+            <div className={styles.meta}>
+              <span className={styles.kindDot} data-kind={type} aria-hidden />
+              <span className={styles.kindLabel}>{label}</span>
+            </div>
+          ) : null}
 
           <h2 className={p ? `${styles.title} ${p.title}` : styles.title}>{title}</h2>
           <p className={p ? `${styles.desc} ${p.desc}` : styles.desc}>{description}</p>

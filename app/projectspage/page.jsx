@@ -7,6 +7,7 @@ import ParsaListingLayout from "../../components/ParsaListingLayout";
 import ParsaPageHero from "../../components/ParsaPageHero";
 import listing from "../../components/HebiExperienceListing.module.scss";
 import pageStyles from "./ProjectPage.module.scss";
+import parsaGrid from "../../components/ParsaProjectsGrid.module.scss";
 import { useTheme } from "../../components/ThemeProvider";
 import { getProjects, getParsaPageCopy } from "../../lib/content";
 
@@ -16,16 +17,16 @@ function ProjectPage() {
   const projects = useMemo(() => getProjects(theme), [theme]);
   const parsaCopy = useMemo(() => getParsaPageCopy("projects"), []);
 
-  const masonry = (
-    <div className={`${listing.masonry} ${pageStyles.masonryGap}`}>
-      {projects
-        .slice()
-        .reverse()
-        .map((project) => (
-          <Project key={project.id} {...project} />
-        ))}
-    </div>
+  const projectList = projects
+    .slice()
+    .reverse()
+    .map((project) => <Project key={project.id} {...project} />);
+
+  const hebiMasonry = (
+    <div className={`${listing.masonry} ${pageStyles.masonryGap}`}>{projectList}</div>
   );
+
+  const parsaGridEl = <div className={parsaGrid.grid}>{projectList}</div>;
 
   if (isParsa) {
     return (
@@ -36,7 +37,7 @@ function ProjectPage() {
           kicker={parsaCopy.kicker}
           meta={parsaCopy.meta}
         />
-        {masonry}
+        {parsaGridEl}
       </ParsaListingLayout>
     );
   }
@@ -54,7 +55,7 @@ function ProjectPage() {
           title="Projects"
           kicker="Product UI, front-end systems, and brand work — from concept through ship."
         />
-        {masonry}
+        {hebiMasonry}
       </div>
     </div>
   );

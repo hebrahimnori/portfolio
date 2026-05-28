@@ -21,6 +21,7 @@ export function useAboutEntrance(rootRef, options = {}) {
     const plate = root.querySelector("[data-about-plate]");
     const figure = root.querySelector("[data-about-figure]");
     const copyBits = root.querySelectorAll("[data-about-copy]");
+    const vitalize = root.querySelector("[data-about-vitalize]");
     const stats = root.querySelectorAll("[data-about-stat]");
     const statLabel = root.querySelector("[data-about-stat-label]");
     const marquee = root.querySelector("[data-about-marquee]");
@@ -44,6 +45,7 @@ export function useAboutEntrance(rootRef, options = {}) {
       });
     }
     if (copyBits.length) gsap.set(copyBits, { opacity: 0, y: 16, x: 12 });
+    if (vitalize) gsap.set(vitalize, { opacity: 0, y: 10 });
     if (statLabel) gsap.set(statLabel, { opacity: 0, y: 8 });
     if (stats.length) {
       gsap.set(stats, { opacity: 0, y: 28, scale: 0.92 });
@@ -106,6 +108,10 @@ export function useAboutEntrance(rootRef, options = {}) {
           },
           0.95
         );
+      }
+
+      if (vitalize) {
+        tl.to(vitalize, { opacity: 1, y: 0, duration: 0.48, ease: "power2.out" }, 1.08);
       }
 
       if (statLabel) {

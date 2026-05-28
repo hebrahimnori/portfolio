@@ -14,6 +14,8 @@ export default function ListingPageHero({
   titleAccent,
   kicker,
   meta,
+  /** @type {"default" | "about"} [size] — about page: larger display name */
+  size = "default",
 }) {
   const rootRef = useRef(null);
 
@@ -67,7 +69,10 @@ export default function ListingPageHero({
   }, []);
 
   return (
-    <header className={styles.hero} ref={rootRef}>
+    <header
+      className={`${styles.hero} ${size === "about" ? styles.heroAbout : ""}`}
+      ref={rootRef}
+    >
       {eyebrow ? (
         <p className={styles.eyebrow} data-hero-eyebrow>
           {eyebrow}

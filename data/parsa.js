@@ -2,6 +2,8 @@
  * Parsa persona (dark theme) — backend / systems focus.
  */
 
+import { getVitalize } from "./vitalize";
+
 export const PARSA_ABOUT = {
   greeting: "Hey, I'm",
   name: "Parsa",
@@ -11,12 +13,7 @@ export const PARSA_ABOUT = {
   aboutTitle: "$ cat about.txt",
   aboutBody:
     "I build the layer under the UI — REST and GraphQL APIs, auth, queues, databases, and deploy pipelines. I care about clear contracts, observability, and systems that stay up when traffic spikes.",
-  employer: {
-    name: "Systems work",
-    role: "Backend · platform",
-    focus: "Node · Python · PostgreSQL · Redis · Docker",
-    url: "",
-  },
+  vitalize: getVitalize("parsa"),
   stats: [
     { id: "api", label: "APIs", sub: "REST · GraphQL", tone: "blue" },
     { id: "data", label: "Data", sub: "SQL · Redis", tone: "pink" },

@@ -1,0 +1,38 @@
+.root {
+  --arian-bg: #e8f2ec;
+  --arian-ink: #142820;
+  --arian-muted: #5f7268;
+  --arian-border: rgba(20, 80, 50, 0.14);
+  --arian-pass: #15803d;
+  --arian-surface: rgba(255, 255, 255, 0.92);
+
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  min-height: 100vh;
+  background: linear-gradient(165deg, #e4f2ea 0%, #eef6f1 42%, #dceee4 100%);
+  color: var(--arian-ink);
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+.backdropSlot {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: clamp(2.25rem, 6vw, 4rem)
+    max(1rem, env(safe-area-inset-right))
+    var(--dock-page-pad, max(7.75rem, calc(env(safe-area-inset-bottom, 0px) + 6.75rem)))
+    max(1rem, env(safe-area-inset-left));
+  box-sizing: border-box;
+  min-width: 0;
+}

@@ -5,17 +5,22 @@ import Project from "../../components/Project";
 import ListingPageHero from "../../components/ListingPageHero";
 import ParsaListingLayout from "../../components/ParsaListingLayout";
 import ParsaPageHero from "../../components/ParsaPageHero";
+import ArianListingLayout from "../../components/ArianListingLayout";
+import ArianPageHero from "../../components/ArianPageHero";
+import ArianExperienceGrid from "../../components/ArianExperienceGrid";
 import listing from "../../components/HebiExperienceListing.module.scss";
 import pageStyles from "./ProjectPage.module.scss";
 import parsaGrid from "../../components/ParsaProjectsGrid.module.scss";
 import { useTheme } from "../../components/ThemeProvider";
-import { getProjects, getParsaPageCopy } from "../../lib/content";
+import { getProjects, getArianPageCopy, getParsaPageCopy } from "../../lib/content";
 
 function ProjectPage() {
   const { theme } = useTheme();
   const isParsa = theme === "dark";
+  const isArian = theme === "arian";
   const projects = useMemo(() => getProjects(theme), [theme]);
   const parsaCopy = useMemo(() => getParsaPageCopy("projects"), []);
+  const arianCopy = useMemo(() => getArianPageCopy("projects"), []);
 
   const projectList = projects
     .slice()
@@ -39,6 +44,20 @@ function ProjectPage() {
         />
         {parsaGridEl}
       </ParsaListingLayout>
+    );
+  }
+
+  if (isArian) {
+    return (
+      <ArianListingLayout>
+        <ArianPageHero
+          eyebrow={arianCopy.eyebrow}
+          title={arianCopy.title}
+          kicker={arianCopy.kicker}
+          meta={arianCopy.meta}
+        />
+        <ArianExperienceGrid items={projects} />
+      </ArianListingLayout>
     );
   }
 

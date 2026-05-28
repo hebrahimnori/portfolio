@@ -15,8 +15,9 @@
 
 @media (min-width: 900px) {
   .pageShell {
-    height: 100dvh;
-    overflow: hidden;
+    min-height: 100dvh;
+    height: auto;
+    overflow: visible;
   }
 }
 
@@ -29,6 +30,7 @@
 
 .contentTight {
   padding-top: clamp(1.75rem, 4vh, 2.75rem) !important;
+  /* Keep room for fixed dock — must not override listing .content bottom pad */
   padding-bottom: var(
     --dock-page-pad,
     max(7.75rem, calc(env(safe-area-inset-bottom, 0px) + 6.75rem))
@@ -38,10 +40,6 @@
 @media (min-width: 900px) {
   .contentTight {
     padding-top: clamp(2rem, 4.5vh, 2.75rem) !important;
-    padding-bottom: var(
-      --dock-page-pad,
-      max(7.75rem, calc(env(safe-area-inset-bottom, 0px) + 6.75rem))
-    ) !important;
   }
 }
 
@@ -58,10 +56,10 @@
 
 @media (min-width: 900px) {
   .canvas {
-    height: calc(100dvh - clamp(5.5rem, 11vh, 7rem));
-    max-height: calc(100dvh - clamp(5.5rem, 11vh, 7rem));
-    overflow: hidden;
-    justify-content: center;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    justify-content: flex-start;
   }
 }
 
@@ -75,15 +73,15 @@
 
 @media (min-width: 900px) {
   .body {
-    justify-content: center;
-    gap: clamp(0.55rem, 1.1vh, 0.85rem);
+    justify-content: flex-start;
+    gap: clamp(0.75rem, 1.5vh, 1rem);
   }
 }
 
 /* —— Profile intro (beside portrait, not Projects-style hero) —— */
 .stageCol {
   position: relative;
-  z-index: 3;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -101,6 +99,7 @@
 .profileIntro {
   flex-shrink: 0;
   margin-bottom: 0;
+  min-width: 0;
 }
 
 .aboutTitleWrap .profileIndex {
@@ -112,114 +111,6 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #00b992;
-}
-
-.aboutTitleWrap {
-  position: relative;
-}
-
-.aboutTitle {
-  margin: 0;
-  padding-left: clamp(0.65rem, 1.2vw, 0.85rem);
-  border-left: 3px solid #00b992;
-}
-
-.titleGreeting {
-  display: block;
-  margin-bottom: 0.35em;
-  font-family:
-    "Plus Jakarta Sans",
-    "IBM Plex Sans",
-    system-ui,
-    sans-serif;
-  font-size: clamp(0.72rem, 1.45vh, 0.8125rem);
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  line-height: 1.2;
-  text-transform: uppercase;
-  color: var(--list-ink-muted, #64748b);
-}
-
-.greetingWord {
-  display: inline-block;
-  will-change: transform, opacity, filter;
-}
-
-.titleDisplay {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 0.04em;
-  margin-top: 0;
-  font-size: clamp(2.35rem, 7.5vh, 3.85rem);
-  line-height: 0.92;
-  letter-spacing: -0.03em;
-}
-
-.letterShell {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-  padding: 0.06em 0.04em 0.1em;
-}
-
-.letterInk {
-  display: inline-block;
-  font-family: "Unbounded", "Plus Jakarta Sans", system-ui, sans-serif;
-  font-weight: 700;
-  font-synthesis: weight;
-  line-height: inherit;
-  letter-spacing: 0.02em;
-  transform-origin: 50% 100%;
-  will-change: clip-path, transform, opacity;
-  background: linear-gradient(
-    125deg,
-    #1a2330 0%,
-    #3d4f5f 38%,
-    #00a389 88%
-  );
-  background-size: 150% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: aboutInkShift 18s ease-in-out infinite;
-}
-
-@keyframes aboutInkShift {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.profileRole {
-  margin: 0.6rem 0 0;
-  padding-left: clamp(0.65rem, 1.2vw, 0.85rem);
-  font-family:
-    "Plus Jakarta Sans",
-    "IBM Plex Sans",
-    system-ui,
-    sans-serif;
-  font-size: clamp(0.8125rem, 1.55vh, 0.9375rem);
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: -0.02em;
-  color: var(--list-ink-muted, #475569);
-  max-width: 32em;
-}
-
-.profileRule {
-  display: block;
-  margin: 0.55rem 0 0 clamp(0.65rem, 1.2vw, 0.85rem);
-  transform-origin: 0 50%;
-  height: 2px;
-  width: 4.25rem;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #00b992, transparent);
-  transform-origin: 0 50%;
 }
 
 /* —— Stage —— */
@@ -404,17 +295,18 @@
   max-width: 36em;
 }
 
-/* Vitalize — light glass row (logo on small dark chip only) */
+/* Vitalize — inline row in copy column */
 .vitalizeRow {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 0.7rem;
-  padding: 0.6rem 0.75rem;
-  border-radius: 14px;
-  background: var(--list-surface-mid, rgba(255, 255, 255, 0.78));
+  gap: 0.65rem;
+  margin-top: 0.65rem;
+  max-width: 36em;
+  padding: 0.5rem 0.55rem 0.5rem 0.5rem;
+  border-radius: 12px;
+  background: var(--list-surface-mid, rgba(255, 255, 255, 0.82));
   border: 1px solid var(--list-border, rgba(89, 111, 138, 0.12));
-  box-shadow: 0 12px 32px -24px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 8px 24px -20px rgba(0, 0, 0, 0.2);
 }
 
 .vitalizeLogoChip {
@@ -443,6 +335,7 @@
 }
 
 .vitalizeCopy {
+  flex: 1;
   min-width: 0;
 }
 
@@ -489,6 +382,25 @@
   color: var(--list-ink-muted, #64748b);
 }
 
+.vitalizeVisit {
+  flex-shrink: 0;
+  margin-left: auto;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1;
+  text-decoration: none;
+  color: color-mix(in srgb, #8a6f0a 70%, #f5c518);
+  background: rgba(245, 197, 24, 0.1);
+  border: 1px solid rgba(245, 197, 24, 0.22);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
 .copyQuote {
   margin: 0.65rem 0 0;
   padding-left: 0.85rem;
@@ -510,14 +422,22 @@
     opacity: 0.92;
     transform: translateY(-1px);
   }
+
+  .vitalizeVisit:hover {
+    background: rgba(245, 197, 24, 0.18);
+    transform: translateY(-1px);
+  }
 }
 
 /* —— Lower —— */
 .lower {
+  position: relative;
+  z-index: 1;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: clamp(0.5rem, 1vh, 0.75rem);
+  margin-top: clamp(0.25rem, 0.8vh, 0.5rem);
 }
 
 .statSection {
@@ -832,28 +752,13 @@
   }
 }
 
-:global(html[data-color-theme="dark"]) .letterInk {
-  background: linear-gradient(
-    125deg,
-    #ffffff 0%,
-    rgba(200, 210, 255, 0.88) 38%,
-    #00b992 88%
-  );
-}
-
 :global(html[data-color-theme="dark"]) .statGhost {
   opacity: 0.1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marqueeInner,
-  .letterInk {
+  .marqueeInner {
     animation: none;
-  }
-
-  .greetingWord,
-  .letterInk {
-    will-change: auto;
   }
 
   .commandPrimary:hover {

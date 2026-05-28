@@ -5,23 +5,33 @@ import { motion } from "framer-motion";
 import ListingPageHero from "../../components/ListingPageHero";
 import ParsaListingLayout from "../../components/ParsaListingLayout";
 import ParsaPageHero from "../../components/ParsaPageHero";
+import ArianListingLayout from "../../components/ArianListingLayout";
+import ArianPageHero from "../../components/ArianPageHero";
 import listing from "../../components/HebiExperienceListing.module.scss";
 import { useTheme } from "../../components/ThemeProvider";
-import { getAcademicEntries, getParsaPageCopy } from "../../lib/content";
+import { getAcademicEntries, getArianPageCopy, getParsaPageCopy } from "../../lib/content";
 import styles from "./AcademicPage.module.scss";
 
 export default function AcademicPage() {
   const { theme } = useTheme();
   const isParsa = theme === "dark";
-  const entries = useMemo(() => getAcademicEntries(), []);
+  const isArian = theme === "arian";
+  const entries = useMemo(() => getAcademicEntries(theme), [theme]);
   const parsaCopy = useMemo(() => getParsaPageCopy("academic"), []);
+  const arianCopy = useMemo(() => getArianPageCopy("academic"), []);
 
   const list = (
     <div className={styles.list}>
       {entries.map((item, index) => (
         <motion.article
           key={item.id}
-          className={isParsa ? `${styles.card} ${styles.parsaCard}` : styles.card}
+          className={
+            isParsa
+              ? `${styles.card} ${styles.parsaCard}`
+              : isArian
+                ? `${styles.card} ${styles.arianCard}`
+                : styles.card
+          }
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
@@ -36,6 +46,13 @@ export default function AcademicPage() {
               {"> log["}
               {String(index + 1).padStart(2, "0")}
               {"]"}
+            </span>
+          ) : null}
+          {isArian ? (
+            <span className={styles.arianPrefix} aria-hidden>
+              ✓ credential[
+              {String(index + 1).padStart(2, "0")}
+              ]
             </span>
           ) : null}
           <p className={styles.period}>{item.period}</p>
@@ -58,6 +75,20 @@ export default function AcademicPage() {
         />
         {list}
       </ParsaListingLayout>
+    );
+  }
+
+  if (isArian) {
+    return (
+      <ArianListingLayout>
+        <ArianPageHero
+          eyebrow={arianCopy.eyebrow}
+          title={arianCopy.title}
+          kicker={arianCopy.kicker}
+          meta={arianCopy.meta}
+        />
+        {list}
+      </ArianListingLayout>
     );
   }
 

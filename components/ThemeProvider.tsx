@@ -13,11 +13,14 @@ import {
   COLOR_THEME_STORAGE_KEY,
   getDefaultColorTheme,
 } from "../data/site";
+import { getNextTheme, type ColorTheme } from "../lib/persona";
 
-export type ColorTheme = "dark" | "light";
+export type { ColorTheme };
 
 type ThemeContextValue = {
   theme: ColorTheme;
+  cycleTheme: () => void;
+  /** @deprecated use cycleTheme */
   toggleTheme: () => void;
 };
 
@@ -35,7 +38,9 @@ export function ThemeProvider({
   useEffect(() => {
     try {
       const stored = localStorage.getItem(COLOR_THEME_STORAGE_KEY);
-      if (stored === "dark" || stored === "light") setTheme(stored);
+      if (stored === "dark" || stored === "light" || stored === "arian") {
+        setTheme(stored);
+      }
     } catch {
       /* ignore */
     }
@@ -43,7 +48,7 @@ export function ThemeProvider({
 
   useEffect(() => {
     document.documentElement.setAttribute("data-color-theme", theme);
-    document.documentElement.style.colorScheme = theme;
+    document.documentElement.style.colorScheme = theme === "light" ? "light" : "dark";
     try {
       localStorage.setItem(COLOR_THEME_STORAGE_KEY, theme);
     } catch {
@@ -51,13 +56,13 @@ export function ThemeProvider({
     }
   }, [theme]);
 
-  const toggleTheme = useCallback(() => {
-    setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const cycleTheme = useCallback(() => {
+    setTheme((t) => getNextTheme(t));
   }, []);
 
   const value = useMemo(
-    () => ({ theme, toggleTheme }),
-    [theme, toggleTheme]
+    () => ({ theme, cycleTheme, toggleTheme: cycleTheme }),
+    [theme, cycleTheme]
   );
 
   return (

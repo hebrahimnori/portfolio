@@ -1,19 +1,22 @@
 /**
- * Site “persona” is tied to color theme (single app, two experiences):
+ * Site “persona” is tied to color theme (single app, three experiences):
  * - **Light** → Hebi (UI/UX + front-end, photography in dock)
- * - **Dark** → Parsa (academic in dock, no photography)
+ * - **Dark** → Parsa (academic in dock, backend focus)
+ * - **Arian** → QA · test automation · quality engineering (academic in dock)
  *
- * Theme is toggled in the dock for now; `localStorage` persists choice.
+ * Theme is cycled in the dock; `localStorage` persists choice.
  */
 
-/** @typedef {"parsa" | "hebi"} SitePersona */
+/** @typedef {"parsa" | "hebi" | "arian"} SitePersona */
 
 /**
- * @param {"light" | "dark"} theme
+ * @param {"light" | "dark" | "arian"} theme
  * @returns {SitePersona}
  */
 export function getSitePersonaFromTheme(theme) {
-  return theme === "light" ? "hebi" : "parsa";
+  if (theme === "light") return "hebi";
+  if (theme === "arian") return "arian";
+  return "parsa";
 }
 
 /** Hebi home (light theme) — orbit + logo experience. */

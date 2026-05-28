@@ -18,6 +18,11 @@ import { usePathname } from "next/navigation";
 import DockSoundIcon from "./DockSoundIcon";
 import { useSiteAudio } from "./SiteAudioProvider";
 import { useTheme } from "./ThemeProvider";
+import {
+  getDockTooltipStyle,
+  getThemeSwitchLabel,
+  isConsolePersona,
+} from "../lib/persona";
 
 interface AppIconProps {
   mouseX: MotionValue<number>;
@@ -29,6 +34,7 @@ function Dock() {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const { soundEnabled, canUseAudio, toggleSound, playClick } = useSiteAudio();
+  const isConsole = isConsolePersona(theme);
   const lastDockHoverAt = useRef(0);
 
   const playDockHover = () => {
@@ -135,6 +141,46 @@ function Dock() {
         )}
       </AppIcon>
       {theme === "dark" ? (
+        <AppIcon mouseX={mouseX} onHoverSound={playDockHover}>
+          <Link
+            href={"/academic"}
+            data-tooltip-id="footer-tooltip"
+            data-tooltip-content="Academic"
+            data-tooltip-place="top"
+          >
+            <svg
+              width="inherit"
+              height="inherit"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 14L21 9L12 4L3 9L12 14Z"
+                stroke="#7A7A7A"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M12 14L18.5 10.75V16.5C18.5 17.05 18.2 17.55 17.7 17.8L12 20.5L6.3 17.8C5.8 17.55 5.5 17.05 5.5 16.5V10.75L12 14Z"
+                fill="#CBCBCB"
+                stroke="#7A7A7A"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M12 14V20.5"
+                stroke="#7A7A7A"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </Link>
+          {pathname === "/academic" && (
+            <span className="pagetrack active"></span>
+          )}
+        </AppIcon>
+      ) : isConsole ? (
         <AppIcon mouseX={mouseX} onHoverSound={playDockHover}>
           <Link
             href={"/academic"}
@@ -290,17 +336,9 @@ function Dock() {
           type="button"
           onClick={() => toggleTheme()}
           data-tooltip-id="footer-tooltip"
-          data-tooltip-content={
-            theme === "dark"
-              ? "Switch to Hebi (light)"
-              : "Switch to Parsa (dark)"
-          }
+          data-tooltip-content={getThemeSwitchLabel(theme)}
           data-tooltip-place="top"
-          aria-label={
-            theme === "dark"
-              ? "Switch to Hebi light theme"
-              : "Switch to Parsa dark theme"
-          }
+          aria-label={getThemeSwitchLabel(theme)}
         >
           {theme === "dark" ? (
             <svg
@@ -361,18 +399,7 @@ function Dock() {
       </AppIcon>
       <Tooltip
         id="footer-tooltip"
-        style={{
-          borderRadius: "6px",
-          fontSize: "12px",
-          padding: "4px 8px",
-          backgroundColor: "transparent",
-          color:
-            theme === "dark"
-              ? "rgba(255, 255, 255, 0.65)"
-              : "rgba(30, 41, 59, 0.55)",
-          border: "none",
-          boxShadow: "none",
-        }}
+        style={getDockTooltipStyle(theme)}
         border="none"
       />
     </motion.div>

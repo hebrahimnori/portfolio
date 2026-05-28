@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 
+import VitalizeChip from "./VitalizeChip";
 import styles from "./ParsaAboutView.module.scss";
 import { useParsaAboutEntrance } from "./useParsaAboutEntrance";
 
@@ -44,17 +45,13 @@ export default function ParsaAboutView({ about, skillMarquee }) {
           <p className={styles.out} data-parsa-term-out>
             {about.aboutBody}
           </p>
-          {about.employer ? (
-            <div data-parsa-pkg>
+          {about.vitalize ? (
+            <>
               <p className={styles.line} data-parsa-term-line>
                 <span className={styles.cmd}>$</span> npm list --depth=0
               </p>
-              <div className={styles.pkgRow}>
-                <span className={styles.pkgName}>{about.employer.name}</span>
-                <span className={styles.pkgVer}>{about.employer.role}</span>
-              </div>
-              <p className={styles.pkgMeta}>{about.employer.focus}</p>
-            </div>
+              <VitalizeChip vitalize={about.vitalize} variant="dark" />
+            </>
           ) : null}
           <p className={styles.comment} data-parsa-comment>
             {about.quoteLine}

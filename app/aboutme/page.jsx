@@ -8,21 +8,26 @@ import listing from "../../components/HebiExperienceListing.module.scss";
 import ParsaListingLayout from "../../components/ParsaListingLayout";
 import ParsaPageHero from "../../components/ParsaPageHero";
 import ParsaAboutView from "../../components/ParsaAboutView";
+import ArianListingLayout from "../../components/ArianListingLayout";
+import ArianPageHero from "../../components/ArianPageHero";
+import ArianAboutView from "../../components/ArianAboutView";
 import { useTheme } from "../../components/ThemeProvider";
-import { getAboutContent, getParsaPageCopy } from "../../lib/content";
+import { getAboutContent, getArianPageCopy, getParsaPageCopy } from "../../lib/content";
 import styles from "./AboutPage.module.scss";
 import AboutTitle from "./AboutTitle";
 import { useAboutEntrance } from "./useAboutEntrance";
-import VitalizeChip from "./VitalizeChip";
+import AboutVitalizeRow from "./AboutVitalizeRow";
 
 export default function AboutMePage() {
   const { theme } = useTheme();
   const isParsa = theme === "dark";
+  const isArian = theme === "arian";
   const about = useMemo(() => getAboutContent(theme), [theme]);
   const parsaCopy = useMemo(() => getParsaPageCopy("about"), []);
+  const arianCopy = useMemo(() => getArianPageCopy("about"), []);
   const [portraitOk, setPortraitOk] = useState(false);
   const rootRef = useRef(null);
-  useAboutEntrance(rootRef, { enabled: !isParsa });
+  useAboutEntrance(rootRef, { enabled: !isParsa && !isArian });
 
   const skillMarquee = useMemo(
     () => [...about.skills, ...about.skills],
@@ -40,6 +45,20 @@ export default function AboutMePage() {
         />
         <ParsaAboutView about={about} skillMarquee={skillMarquee} />
       </ParsaListingLayout>
+    );
+  }
+
+  if (isArian) {
+    return (
+      <ArianListingLayout>
+        <ArianPageHero
+          eyebrow={arianCopy.eyebrow}
+          title={arianCopy.title}
+          kicker={arianCopy.kicker}
+          meta={arianCopy.meta}
+        />
+        <ArianAboutView about={about} />
+      </ArianListingLayout>
     );
   }
 
@@ -95,7 +114,7 @@ export default function AboutMePage() {
                   <p className={styles.copyLead} data-about-copy>
                     {about.aboutBody}
                   </p>
-                  <VitalizeChip vitalize={about.vitalize} />
+                  {about.vitalize ? <AboutVitalizeRow vitalize={about.vitalize} /> : null}
                   <blockquote className={styles.copyQuote} data-about-copy>
                     {about.quoteLine}
                   </blockquote>

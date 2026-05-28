@@ -78,3 +78,31 @@
   letter-spacing: 0.06em;
   color: color-mix(in srgb, var(--list-ink-muted, #596f8a) 82%, transparent);
 }
+
+/* About page — larger name, same system as Projects / Photography */
+.heroAbout {
+  margin-bottom: clamp(0.85rem, 2vh, 1.25rem);
+  max-width: 100%;
+}
+
+.heroAbout .title {
+  font-weight: 800;
+  font-size: clamp(2.65rem, 8.5vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.heroAbout .titleAccent {
+  font-weight: 600;
+  font-size: clamp(0.875rem, 2.4vw, 1.125rem);
+}
+
+@media (min-width: 640px) {
+  .heroAbout .titleAccent {
+    font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+  }
+}
+
+.heroAbout .kicker {
+  font-size: clamp(0.8125rem, 1.8vw, 0.9375rem);
+}

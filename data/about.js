@@ -2,6 +2,8 @@
  * About page copy — swap portrait path or strings anytime.
  */
 
+import { getVitalize } from "./vitalize";
+
 export const ABOUT_CONTENT = {
   greeting: "Hey, I'm Hebi",
   roleLine: "App & front-end developer — React Native · React · Vue",
@@ -10,15 +12,7 @@ export const ABOUT_CONTENT = {
   aboutTitle: "About",
   aboutBody:
     "I build mobile and web products end to end — React Native apps, React and Vue front ends, Tailwind systems, and GSAP motion when it earns its place. Right now that work lives at Vitalize.",
-  vitalize: {
-    name: "Vitalize",
-    logoSrc: "/assets/vitalize-logo.png",
-    logoAlt: "Vitalize logo",
-    role: "App & Front-end Developer",
-    focus: "React Native · React · Vue · Tailwind · GSAP",
-    /** Optional company URL — leave empty to hide link */
-    url: "",
-  },
+  vitalize: getVitalize("hebi"),
   stats: [
     {
       id: "mobile",

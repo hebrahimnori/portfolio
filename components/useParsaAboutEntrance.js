@@ -16,7 +16,7 @@ export function useParsaAboutEntrance(rootRef) {
     const terminal = root.querySelector("[data-parsa-terminal]");
     const lines = root.querySelectorAll("[data-parsa-term-line]");
     const outs = root.querySelectorAll("[data-parsa-term-out]");
-    const pkg = root.querySelector("[data-parsa-pkg]");
+    const pkg = root.querySelector("[data-parsa-pkg], [data-vitalize-chip]");
     const comment = root.querySelector("[data-parsa-comment]");
     const metrics = root.querySelector("[data-parsa-metrics]");
     const statLabel = root.querySelector("[data-parsa-stat-label]");
